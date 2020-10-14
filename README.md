@@ -15,6 +15,7 @@ TO allow Node Red UI alarm to talk to Yet another Alarm Panel you will need to t
 4.  From there you will need to make a couple of changes which I have added notes to in the flow.
 5.  Copy alarm_logging.json to /config/resources/bwalarm
 6.  Copy the images to /config/resources/bwalarm/images/
+7.  I included a heavily redacted version of my bwalarm.yaml for reference.
 
 ## Note
 You will have to have an operational installation of bwalarm, including a valid bwalarm.yaml located in /config/resources/bwalarm. I recommend the "Ak74 edition" - https://github.com/akasma74/Hass-Custom-Alarm

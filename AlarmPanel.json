@@ -1100,7 +1100,7 @@
       "format":"utf8",
       "sendError":true,
       "x":530,
-      "y":180,
+      "y":120,
       "wires":[
          [
             "b8092ea0.fc914"
@@ -2063,6 +2063,18 @@
             "6827701b.2f4c8",
             "e9f3a96.5d9e758"
          ]
+      ]
+   },
+   {
+      "id":"6dff16d.0a2f7e8",
+      "type":"comment",
+      "z":"921828c8.c6fe68",
+      "name":"<== Change path to your bwalarm.yaml",
+      "info":"",
+      "x":790,
+      "y":120,
+      "wires":[
+         
       ]
    },
    {

@@ -1,0 +1,116 @@
+platform: bwalarm
+panel:
+  cameras: []
+  panel_title: My Home
+  enable_clock: false
+  enable_clock_12hr: false
+  enable_weather: false
+  enable_fahrenheit: false
+  hide_passcode: 'True'
+  hide_sidebar: 'True'
+  round_buttons: true
+  enable_serif_font: false
+  enable_floorplan_panel: 'False'
+  floorplan: binary_sensor.family_room_slider
+  camera_update_interval: ''
+  shadow_effect: true
+enable_night_mode: true
+states:
+  armed_away:
+    immediate:
+    - binary_sensor.smoke_detectors
+    - binary_sensor.dinette_windows
+    - binary_sensor.family_room_slider
+    - binary_sensor.family_room_window
+    - binary_sensor.laundry_window
+    - binary_sensor.living_room_windows
+    - binary_sensor.mbr_windows
+    - binary_sensor.office_window
+    - binary_sensor.outside_garage_door
+    - binary_sensor.retreat_window
+    - binary_sensor.mbr_motion
+    delayed:
+    - binary_sensor.front_door
+    - binary_sensor.laundry_door
+    - binary_sensor.retreat_door
+    - binary_sensor.living_room_motion
+    override: []
+    pending_time: 30
+    warning_time: 30
+    trigger_time: 600
+  armed_home:
+    immediate:
+    - binary_sensor.smoke_detectors
+    delayed:
+    - binary_sensor.family_room_slider
+    - binary_sensor.front_door
+    - binary_sensor.laundry_door
+    - binary_sensor.retreat_door
+    - binary_sensor.outside_garage_door
+    override: []
+    pending_time: 0
+    warning_time: 30
+    trigger_time: 600
+  armed_night:
+    immediate:
+    - binary_sensor.smoke_detectors
+    - binary_sensor.outside_garage_door
+    - binary_sensor.family_room_slider
+    delayed:
+    - binary_sensor.front_door
+    - binary_sensor.laundry_door
+    - binary_sensor.retreat_door
+    override: []
+    pending_time: 0
+    warning_time: 30
+    trigger_time: 600
+users:
+- id: 4d922b80e3594d8cb3d22a2be399ac76
+  name: Home Assistant Cloud
+  enabled: false
+  code: 4d922b80e3594d8cb3d22a2be399ac76
+  picture: ha.png
+- id: 873e47f93169490eae82bea626e3b820
+  name: Hass.io
+  enabled: false
+  code: 873e47f93169490eae82bea626e3b820
+  picture: ha.png
+- id: 1594e8a2d3fd4282bd50858ba747bf98
+  name: Me
+  enabled: true
+  code: '1111'
+  picture: ha.png
+- id: f64f98857c724c809a93132ab08b3257
+  name: My Wife
+  enabled: true
+  code: '2222'
+  picture: ha.png
+- id: 18916ca399ef4473b40c384c1956109b
+  name: My Daughter
+  enabled: true
+  code: '3333'
+  picture: ha.png
+- id: c81bd2420ace415e920fd91ae4ce9c78
+  name: My Son
+  enabled: true
+  code: '4444'
+  picture: ha.png
+- id: 3fad030974524469a6497c915249d172
+  name: Tablets
+  enabled: false
+  code: 3fad030974524469a6497c915249d172
+  picture: ha.png
+enable_persistence: true
+admin_password: admin_password
+mqtt:
+  enable_mqtt: true
+  payload_arm_away: ARM_AWAY
+  payload_arm_night: ARM_NIGHT
+  command_topic: home/alarm/set
+  payload_disarm: DISARM
+  state_topic: home/alarm
+  qos: 0
+  pending_on_warning: false
+  override_code: true
+  payload_arm_home: ARM_HOME
+panic_code: '5555'
