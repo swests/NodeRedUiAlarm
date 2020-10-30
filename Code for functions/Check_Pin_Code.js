@@ -3,7 +3,6 @@ var msgs = {};
 var codes = [];
 var key_input = parseInt(msg.payload[0]);  //comes in a string, needs to be int
 var action_input = msg.payload[1];
-var msg_error = 0;
 var key_check = false;
 var usercode = [];
 
@@ -17,6 +16,7 @@ conf_name = global.get("name");
 conf_picture = global.get("picture");
 counter = global.get("Counter") ;
 maxretries = global.get("MaxRetries");
+need_pin_to_arm = global.get("NeedCodeToArm");
 
 // timestamp
 var today = new Date();
@@ -36,18 +36,15 @@ if (mm < 10) {
 
 var today1 = mm + '/' + dd + '/' + yyyy;
 
-// Only check pin if DISARM
-if (action_input == 'ARM_AWAY') {
+// Do we need a PIN to arm? Is the pin valid
+if (action_input == 'DISARM' || need_pin_to_arm == true) {
+    key_check = conf_codes.includes(key_input);
+}
+else  {
     key_check = true;
 }
 
-else {
-    key_check = conf_codes.includes(key_input);
-}
-
-// key_check = true; // temp
-
-if (key_check == true) { 
+if (key_check == true) {  // if we have a valid pin then see if it also has a named user - for the log
 
     //logging
     for ( var i = 0; i < conf_codes.length; i++) {
@@ -65,21 +62,19 @@ if (key_check == true) {
 
 }
 
+// update "failed tries" counter or reset to 0 if we have a good pin
 if (key_check == false) { 
-    msg_error = 1;
+//    msg_error = 1;
     msgs.pin = "Wrong PIN";
-}
-
-// check failed counter or reset to 0    
-if (msg_error == 1 ) {
-    counter += 1;
+    counter += 1; 
     global.set("Counter", counter);
 }
-if (msg_error == 0 ) {
+else {
     counter = 0; 
     global.set("Counter", counter);
 }
-msgs.counter = counter
+msgs.counter = counter;
+
 
 // initiate lock state
 if ( counter >= maxretries ) { 
@@ -89,20 +84,15 @@ if ( counter <= maxretries ) {
     msgs.locked = "unlocked";
 }
 
-if ( msgs.locked == "locked") { 
-    node.log("1");
+//send result on one of the 4 outputs
+if ( msgs.locked == "locked") { //too many fails so locked
     return [ null, msgs, null, null]; 
-}
-if ( key_check == true ) { 
-    node.log("2");
+} else if ( key_check == true ) { //Correct pin
     return [ msg, null, null, null]; 
-}
-if ( key_check == false ) { 
-    node.log("3");
+} else if ( key_check == false ) { //Incorrect pin
     return [ null, null, null, msgs]; 
 }
-else {
-    node.log("4");
+else { // Not sure if this will ever fire...
     return [ null, null, msgs, null];
 }
 

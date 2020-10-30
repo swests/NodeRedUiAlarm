@@ -1,4 +1,3 @@
-
 // reset global variables
 global.set("usercount","")
 global.set("codes","")
