@@ -16,6 +16,6 @@ To allow Node Red UI alarm to talk to Yet another Alarm Panel you will need to t
 I included a heavily redacted version of bwalarm.yaml (from kmycek's repo) for reference.
 
 ## Note
-I'm working on the code for the "Check Pin Code" function in the flow.  To keep things simple, I've added this as a seperate file to the project.  See "Code-for-Check-Pin-Code-Function.js" for the edits.  This should make tracking changes easier as you can just overwrite the existing function code with this snippet.
+I'm working on the code for the "Check Pin Code" function in the flow.  To keep things simple, I've added this as a seperate file to the project.  See "Code for functions" folder for the edits. Filename is same as the function name in the flow. This should make tracking changes easier as you can just overwrite the existing function code with this snippet.
 
 You will have to have an operational installation of bwalarm, including a valid bwalarm.yaml located in /config/resources/bwalarm. Like kmycek, I recommend the "Ak74 edition" - https://github.com/akasma74/Hass-Custom-Alarm
