@@ -64,7 +64,6 @@ if (key_check == true) {  // if we have a valid pin then see if it also has a na
 
 // update "failed tries" counter or reset to 0 if we have a good pin
 if (key_check == false) { 
-//    msg_error = 1;
     msgs.pin = "Wrong PIN";
     counter += 1; 
     global.set("Counter", counter);
